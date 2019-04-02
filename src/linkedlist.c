@@ -24,12 +24,14 @@ No* get_node_lst(LinkedList* lst, unsigned pos)
     return NULL;
 }
 
-void init_lst(LinkedList* lst){
-    lst = malloc(sizeof(LinkedList));
+LinkedList* init_lst(){
+    LinkedList* lst = (LinkedList*) malloc(sizeof(LinkedList));
 
     lst->_size = 0;
     lst->root = NULL;
     lst->last = NULL;
+
+    return lst;
 }
 
 void destroy_lst(LinkedList* lst)
@@ -40,16 +42,15 @@ void destroy_lst(LinkedList* lst)
     }
 }
 
-void push_lst(LinkedList* lst, void* data)
+void push_lst(LinkedList* lst, data_type data)
 {
-    printf("%i", *data);
-    No* new_node = malloc(sizeof(LinkedList));
+    No* new_node = (No*) malloc(sizeof(No));
 
     if(new_node != NULL)
     {
         new_node->data = data;
 
-        if(lst->root != NULL)
+        if(lst->root == NULL)
         {
             lst->root = new_node;
             lst->last = lst->root;
@@ -77,32 +78,31 @@ void remove_lst(LinkedList* lst, unsigned pos)
 
         lst->root = lst->root->next;
 
-        free(removed->data);
         free(removed);
         lst->_size--;
     }
     else
     {
         No* prev = get_node_lst(lst, pos-1);
-        No* removed = prev->next;
 
         if(prev != NULL)
         {
+            No* removed = prev->next;
             prev->next = removed->next;
 
-            free(removed->data);
             free(removed);
             lst->_size--;
         }
         else
         {
             //out of range
+            printf("Possition %i is not available!\n", pos);
             return;
         }
     }
 }
 
-void* get_lst(LinkedList* lst, unsigned pos)
+data_type get_lst(LinkedList* lst, unsigned pos)
 {
     No* result = get_node_lst(lst, pos);
 
@@ -112,11 +112,21 @@ void* get_lst(LinkedList* lst, unsigned pos)
     }
     else
     {
-        return NULL;
+        printf("Possition %i is not available!\n", pos);
+        return;
     }
 }
 
 unsigned size_lst(LinkedList* lst)
 {
     return lst->_size;
+}
+
+void print_lst(LinkedList* lst)
+{
+    int i = 0;
+    for(; i < size_lst(lst); i++)
+    {
+        printf("Item: %i\n", get_lst(lst, i));
+    }
 }

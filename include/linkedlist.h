@@ -1,9 +1,11 @@
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
 
+typedef int data_type;
+
 typedef struct node
 {
-    void* data;
+    data_type data;
     struct node* next;
 } No;
 
@@ -17,12 +19,14 @@ typedef struct
 } LinkedList;
 
 
-void init_lst(LinkedList* lst);
-void destroy_lst(LinkedList* lst);
+LinkedList* init_lst();
+void destroy_lst    (LinkedList* lst);
 
-void push_lst(LinkedList* lst, void* data);
+void push_lst(LinkedList* lst, data_type data);
 void remove_lst(LinkedList* lst, unsigned pos);
-void* get_lst(LinkedList* lst, unsigned pos);
+data_type get_lst(LinkedList* lst, unsigned pos);
 unsigned size_lst(LinkedList* lst);
+
+void print_lst(LinkedList* lst);
 
 #endif // LINKEDLIST_H

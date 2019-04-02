@@ -5,22 +5,27 @@
 
 int main()
 {
-    LinkedList* lst = NULL;
-    init_lst(lst);
+    LinkedList* lst = init_lst();
+    printf("Tamanho: %d\n", size_lst(lst));
 
-    int i = 0;
-    for(; i < 10; i++)
-    {
-        int* temp = (int*) malloc(sizeof(int));
-        *temp = i;
+    push_lst(lst, 1);
+    push_lst(lst, 2);
+    push_lst(lst, 3);
+    push_lst(lst, 4);
+    push_lst(lst, 5);
 
-        //printf("main %i\n", i);
+    printf("Tamanho: %d\n", size_lst(lst));
 
-        push_lst(lst, (void*)temp);
-    }
+    printf("Antes\n");
+    print_lst(lst);
 
 
-    printf("Hello world!\n");
+    remove_lst(lst, 10);
+    get_lst(lst, 10);
 
-    return EXIT_SUCCESS;
+
+    printf("Depois\n");
+    print_lst(lst);
+
+    return 0;
 }
