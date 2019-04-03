@@ -3,7 +3,7 @@
 
 typedef int data_type;
 
-typedef struct node
+typedef struct node_lst
 {
     data_type data;
     struct node* next;
@@ -20,7 +20,7 @@ typedef struct
 
 
 LinkedList* init_lst();
-void destroy_lst    (LinkedList* lst);
+void destroy_lst(LinkedList* lst);
 
 void push_lst(LinkedList* lst, data_type data);
 void remove_lst(LinkedList* lst, unsigned pos);
